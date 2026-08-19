@@ -1,30 +1,9 @@
 [
   {
-    "id": 1001,
-    "productId": 9,
-    "size": "Large",
-    "color": "White",
-    "quantity": 1
-  },
-  {
-    "id": 1002,
+    "id": "4f370a84-c11a-4b71-bf58-89a0760e77d9",
     "productId": 3,
-    "size": "Medium",
-    "color": "Red",
-    "quantity": 1
-  },
-  {
-    "id": 1003,
-    "productId": 2,
-    "size": "Large",
-    "color": "Blue",
-    "quantity": 1
-  },
-  {
-    "id": 1786918432216,
-    "productId": 4,
-    "size": "Small",
-    "color": "#c1440e",
-    "quantity": 1
+    "size": "X-Large",
+    "color": "#7a1f2b",
+    "quantity": 10
   }
 ]

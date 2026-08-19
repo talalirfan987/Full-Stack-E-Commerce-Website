@@ -1,4 +1,5 @@
 const express = require("express");
+const crypto = require("crypto");
 const router = express.Router();
 const { readData, writeData } = require("../utils/jsonStore");
 
@@ -49,7 +50,7 @@ router.post("/", (req, res) => {
     existing.quantity += Number(quantity);
   } else {
     cart.push({
-      id: Date.now(),
+      id: crypto.randomUUID(),
       productId: Number(productId),
       size: size || null,
       color: color || null,
@@ -65,7 +66,7 @@ router.post("/", (req, res) => {
 router.put("/:id", (req, res) => {
   const { quantity } = req.body;
   const cart = readData("cart.json");
-  const item = cart.find((i) => i.id === Number(req.params.id));
+  const item = cart.find((i) => i.id === req.params.id);
 
   if (!item) {
     return res.status(404).json({ message: "Cart item not found" });
@@ -79,7 +80,7 @@ router.put("/:id", (req, res) => {
 // DELETE /api/cart/:id - remove item
 router.delete("/:id", (req, res) => {
   let cart = readData("cart.json");
-  cart = cart.filter((i) => i.id !== Number(req.params.id));
+  cart = cart.filter((i) => i.id !== req.params.id);
   writeData("cart.json", cart);
   res.json(withProductDetails(cart));
 });
