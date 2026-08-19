@@ -3,6 +3,7 @@
   gap: 1rem;
   padding: 1.25rem 0;
   border-bottom: 1px solid var(--color-border);
+  animation: fadeInUp 0.3s ease both;
 }
 
 .cart-item:last-child {
@@ -86,4 +87,19 @@
   border: none;
   font-size: 1rem;
   width: 20px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.cart-item__qty button:hover {
+  transform: scale(1.2);
+  opacity: 0.7;
+}
+
+.cart-item__remove {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.cart-item__remove:hover {
+  transform: scale(1.15);
+  opacity: 0.75;
 }

@@ -41,8 +41,9 @@ function Navbar() {
 
       <div className="navbar__main container">
         <button
-          className="navbar__toggle"
+          className={`navbar__toggle ${menuOpen ? "navbar__toggle--open" : ""}`}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
           onClick={() => setMenuOpen((open) => !open)}
         >
           <span />

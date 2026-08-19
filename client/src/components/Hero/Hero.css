@@ -12,6 +12,7 @@
 .hero__text {
   flex: 1;
   min-width: 0;
+  animation: fadeInUp 0.6s ease both;
 }
 
 .hero__text h1 {
@@ -60,6 +61,7 @@
   min-width: 0;
   display: flex;
   justify-content: center;
+  animation: fadeIn 0.8s ease both;
 }
 
 .hero__image img {
