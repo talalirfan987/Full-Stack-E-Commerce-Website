@@ -1,0 +1,68 @@
+[
+  {
+    "id": "331499d3-c71d-4953-87e1-80da1b572120",
+    "fullName": "Test User",
+    "phone": "03001234567",
+    "address": "123 St",
+    "city": "Lahore",
+    "paymentMethod": "Cash on Delivery",
+    "items": [
+      {
+        "productId": 9,
+        "name": "Gradient Graphic T-shirt",
+        "price": 145,
+        "size": "Large",
+        "color": "White",
+        "quantity": 1
+      },
+      {
+        "productId": 3,
+        "name": "Checkered Shirt",
+        "price": 180,
+        "size": "Medium",
+        "color": "Red",
+        "quantity": 1
+      },
+      {
+        "productId": 2,
+        "name": "Skinny Fit Jeans",
+        "price": 240,
+        "size": "Large",
+        "color": "Blue",
+        "quantity": 1
+      },
+      {
+        "productId": 4,
+        "name": "Sleeve Striped T-shirt",
+        "price": 130,
+        "size": "Small",
+        "color": "#c1440e",
+        "quantity": 1
+      }
+    ],
+    "total": 710,
+    "status": "pending",
+    "createdAt": "2026-08-19T14:22:21.911Z"
+  },
+  {
+    "id": "6d714716-c13a-4231-9147-82e52720e84c",
+    "fullName": "Talal Irfan",
+    "phone": "03121128987",
+    "address": "House No 14, SMCHS Block B, Shahrah-e-Faisal, near Ibex",
+    "city": "Karachi",
+    "paymentMethod": "Cash on Delivery",
+    "items": [
+      {
+        "productId": 11,
+        "name": "Black Striped T-shirt",
+        "price": 120,
+        "size": "Small",
+        "color": "#000000",
+        "quantity": 1
+      }
+    ],
+    "total": 135,
+    "status": "pending",
+    "createdAt": "2026-08-19T14:26:07.446Z"
+  }
+]

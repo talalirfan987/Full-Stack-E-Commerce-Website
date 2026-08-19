@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import CartItem from "../../components/CartItem/CartItem";
@@ -9,6 +10,7 @@ import { getCart, updateCartItem, removeCartItem } from "../../api/api";
 import "./Cart.css";
 
 function Cart() {
+  const navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -87,7 +89,7 @@ function Cart() {
               ))}
             </div>
 
-            <OrderSummary subtotal={subtotal} onCheckout={() => {}} />
+            <OrderSummary subtotal={subtotal} onCheckout={() => navigate("/checkout")} />
           </div>
         )}
       </main>

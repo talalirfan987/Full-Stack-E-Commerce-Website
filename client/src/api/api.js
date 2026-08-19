@@ -43,6 +43,9 @@ export const updateCartItem = (id, quantity) =>
 
 export const removeCartItem = (id) => request(`/cart/${id}`, { method: "DELETE" });
 
+export const placeOrder = (data) =>
+  request("/orders", { method: "POST", body: JSON.stringify(data) });
+
 export const signup = (data) =>
   request("/auth/signup", { method: "POST", body: JSON.stringify(data) });
 
