@@ -64,5 +64,34 @@
     "total": 135,
     "status": "pending",
     "createdAt": "2026-08-19T14:26:07.446Z"
+  },
+  {
+    "id": "8fcb9d27-4c37-43bc-a4bc-37de565563e1",
+    "fullName": "Talal Irfan",
+    "phone": "03121128987",
+    "address": "House No 14, SMCHS Block B, Shahrah-e-Faisal, near Ibex",
+    "city": "Karachi",
+    "paymentMethod": "Cash on Delivery",
+    "items": [
+      {
+        "productId": 3,
+        "name": "Checkered Shirt",
+        "price": 180,
+        "size": "X-Large",
+        "color": "#7a1f2b",
+        "quantity": 10
+      },
+      {
+        "productId": 1,
+        "name": "T-shirt with Tape Details",
+        "price": 120,
+        "size": "Small",
+        "color": "#000000",
+        "quantity": 1
+      }
+    ],
+    "total": 1935,
+    "status": "pending",
+    "createdAt": "2026-08-20T19:30:41.091Z"
   }
 ]
