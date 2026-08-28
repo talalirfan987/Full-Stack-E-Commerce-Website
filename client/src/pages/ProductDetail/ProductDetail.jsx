@@ -9,6 +9,7 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Footer from "../../components/Footer/Footer";
 import { getProduct, getReviews, getProducts, addToCart } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 import "./ProductDetail.css";
 
 const REVIEWS_PAGE_SIZE = 6;
@@ -98,7 +99,8 @@ function ProductDetail() {
     return (
       <>
         <Navbar />
-        <p className="pd__status container">Loading product...</p>
+        <Loader label="Loading product details..." />
+        <Footer />
       </>
     );
   }

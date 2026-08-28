@@ -8,6 +8,7 @@ import Pagination from "../../components/Pagination/Pagination";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Footer from "../../components/Footer/Footer";
 import { getProducts } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 import "./Category.css";
 
 const PAGE_SIZE = 9;
@@ -131,7 +132,7 @@ function Category() {
               </div>
             </div>
 
-            {loading && <p className="category-page__status">Loading products...</p>}
+            {loading && <Loader label="Loading product catalog..." />}
             {error && <p className="category-page__status">Couldn't load products.</p>}
 
             {!loading && !error && (

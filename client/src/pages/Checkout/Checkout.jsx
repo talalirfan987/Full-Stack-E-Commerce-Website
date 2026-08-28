@@ -5,6 +5,7 @@ import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Footer from "../../components/Footer/Footer";
 import { getCart, placeOrder } from "../../api/api";
 import { useAuth } from "../../context/AuthContext";
+import Loader from "../../components/Loader/Loader";
 import "./Checkout.css";
 
 function Checkout() {
@@ -95,7 +96,7 @@ function Checkout() {
             <p>Redirecting you home...</p>
           </div>
         ) : loading ? (
-          <p>Loading...</p>
+          <Loader label="Preparing checkout..." />
         ) : cart.length === 0 ? (
           <div className="checkout__empty">
             <h1>Your cart is empty</h1>

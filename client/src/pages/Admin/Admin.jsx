@@ -13,6 +13,7 @@ import {
 import { useAuth } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import Loader from "../../components/Loader/Loader";
 import "./Admin.css";
 
 const STATUS_OPTIONS = ["pending", "processing", "shipped", "delivered", "cancelled"];
@@ -387,10 +388,7 @@ function Admin() {
         </div>
 
         {loading ? (
-          <div className="admin-loading">
-            <div className="admin-spinner" />
-            <p>Loading Admin Dashboard data...</p>
-          </div>
+          <Loader label="Loading Admin Dashboard..." />
         ) : error ? (
           <div className="admin-error">
             <p>⚠️ {error}</p>

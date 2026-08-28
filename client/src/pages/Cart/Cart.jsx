@@ -7,6 +7,7 @@ import OrderSummary from "../../components/OrderSummary/OrderSummary";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Footer from "../../components/Footer/Footer";
 import { getCart, updateCartItem, removeCartItem } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 import "./Cart.css";
 
 function Cart() {
@@ -69,7 +70,7 @@ function Cart() {
       <main className="cart-page container">
         <h1 className="cart-page__title">Your Cart</h1>
 
-        {loading && <p>Loading cart...</p>}
+        {loading && <Loader label="Loading your cart..." />}
         {error && <p>Couldn't load your cart. Please try again.</p>}
 
         {!loading && !error && cart.length === 0 && (
