@@ -7,6 +7,7 @@ import Testimonials from "../../components/Testimonials/Testimonials";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Footer from "../../components/Footer/Footer";
 import { getProducts, getDressStyles, getTestimonials } from "../../api/api";
+import Loader from "../../components/Loader/Loader";
 
 function Home() {
   const [newArrivals, setNewArrivals] = useState([]);
@@ -51,6 +52,7 @@ function Home() {
 
   return (
     <>
+      {loading && <Loader fullPage={true} label="Loading SHOP.CO..." />}
       <Navbar />
       <Hero />
       <ProductSection

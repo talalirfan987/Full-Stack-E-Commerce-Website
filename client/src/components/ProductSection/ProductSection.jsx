@@ -1,4 +1,5 @@
 import ProductCard from "../ProductCard/ProductCard";
+import Loader from "../Loader/Loader";
 import "./ProductSection.css";
 
 function ProductSection({ id, title, products, loading, error }) {
@@ -7,7 +8,7 @@ function ProductSection({ id, title, products, loading, error }) {
       <div className="container">
         <h2 className="section-title">{title}</h2>
 
-        {loading && <p className="product-section__status">Loading...</p>}
+        {loading && <Loader label={`Loading ${title}...`} />}
         {error && <p className="product-section__status">Couldn't load products.</p>}
 
         {!loading && !error && (
