@@ -7,6 +7,7 @@ import Category from "./pages/Category/Category";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
+import Admin from "./pages/Admin/Admin";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

@@ -51,3 +51,24 @@ export const signup = (data) =>
 
 export const login = (data) =>
   request("/auth/login", { method: "POST", body: JSON.stringify(data) });
+
+export const getOrders = () => request("/orders");
+
+export const updateOrderStatus = (id, status) =>
+  request(`/orders/${id}/status`, {
+    method: "PUT",
+    body: JSON.stringify({ status }),
+  });
+
+export const deleteOrder = (id) =>
+  request(`/orders/${id}`, { method: "DELETE" });
+
+export const addProduct = (data) =>
+  request("/products", { method: "POST", body: JSON.stringify(data) });
+
+export const updateProduct = (id, data) =>
+  request(`/products/${id}`, { method: "PUT", body: JSON.stringify(data) });
+
+export const deleteProduct = (id) =>
+  request(`/products/${id}`, { method: "DELETE" });
+

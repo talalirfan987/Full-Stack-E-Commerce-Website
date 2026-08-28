@@ -51,6 +51,7 @@ sirf products ka logic rakhta hai, `cart.js` sirf cart ka. Ye maintainable aur r
 | `/cart` | Cart | Add/remove/update quantity, promo code, order summary |
 | `/signup` | Signup | Account banane ka form |
 | `/login` | Login | Existing account se login |
+| `/admin` | Admin Portal | Live orders dashboard (customer details, address, items, status update, delete) & products management |
 
 ---
 
@@ -58,10 +59,11 @@ sirf products ka logic rakhta hai, `cart.js` sirf cart ka. Ye maintainable aur r
 
 | Method | Endpoint | Kaam |
 |---|---|---|
-| GET | `/api/products` | Sab products (filter/sort/pagination ke sath) |
+| GET/POST/PUT/DELETE | `/api/products` | Sab products (filter/sort/crud) |
 | GET | `/api/products/:id` | Ek product ki detail |
 | GET/POST | `/api/products/:id/reviews` | Reviews dekhna/dalna |
 | GET/POST/PUT/DELETE | `/api/cart` | Cart manage karna |
+| GET/POST/PUT/DELETE | `/api/orders` | Orders place karna, list karna, status update karna (`PUT /:id/status`), aur delete karna (`DELETE /:id`) |
 | POST | `/api/auth/signup` | Naya account banana |
 | POST | `/api/auth/login` | Login karna |
 | GET | `/api/dress-styles`, `/api/testimonials` | Static homepage data |

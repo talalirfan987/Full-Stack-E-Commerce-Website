@@ -55,9 +55,45 @@ router.post("/", (req, res) => {
   res.status(201).json(order);
 });
 
-// GET /api/orders - list all orders (admin)
+// GET /api/orders - list all orders (admin), sorted newest first
 router.get("/", (req, res) => {
-  res.json(readData("orders.json"));
+  const orders = readData("orders.json");
+  orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  res.json(orders);
+});
+
+// PUT /api/orders/:id/status - update order status
+router.put("/:id/status", (req, res) => {
+  const { status } = req.body;
+  if (!status) {
+    return res.status(400).json({ message: "Status is required" });
+  }
+
+  const orders = readData("orders.json");
+  const index = orders.findIndex((o) => o.id === req.params.id);
+
+  if (index === -1) {
+    return res.status(404).json({ message: "Order not found" });
+  }
+
+  orders[index].status = status;
+  writeData("orders.json", orders);
+
+  res.json(orders[index]);
+});
+
+// DELETE /api/orders/:id - delete an order
+router.delete("/:id", (req, res) => {
+  const orders = readData("orders.json");
+  const filtered = orders.filter((o) => o.id !== req.params.id);
+
+  if (filtered.length === orders.length) {
+    return res.status(404).json({ message: "Order not found" });
+  }
+
+  writeData("orders.json", filtered);
+  res.json({ message: "Order deleted successfully" });
 });
 
 module.exports = router;
+

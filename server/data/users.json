@@ -1,9 +1,18 @@
 [
   {
+    "id": 1,
+    "name": "Store Admin",
+    "email": "admin@shop.co",
+    "passwordHash": "$2b$10$j5qQ1nDxlpB4CMeJvHK55OGNQnnF2Q6mSW1.K4H6TzfUR8bjkC4oe",
+    "role": "admin",
+    "createdAt": "2026-08-01T00:00:00.000Z"
+  },
+  {
     "id": 1786919100340,
     "name": "Talal Irfan",
     "email": "talalirfan987@gmail.com",
     "passwordHash": "$2b$10$Q0vOwLrwe/PEc0S6rB50zefqgiZ4u91hHtVd9Lvw1.qZYUND.T57i",
+    "role": "customer",
     "createdAt": "2026-08-16T22:25:00.340Z"
   }
 ]

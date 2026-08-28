@@ -93,5 +93,47 @@
     "total": 1935,
     "status": "pending",
     "createdAt": "2026-08-20T19:30:41.091Z"
+  },
+  {
+    "id": "4822302b-137d-495c-8044-63ed7e521673",
+    "fullName": "Store Admin",
+    "phone": "03121128987",
+    "address": "House No 14, SMCHS Block B, Shahrah-e-Faisal, near Ibex",
+    "city": "Karachi",
+    "paymentMethod": "Cash on Delivery",
+    "items": [
+      {
+        "productId": 2,
+        "name": "Skinny Fit Jeans",
+        "price": 240,
+        "size": "Small",
+        "color": "#2b4a6f",
+        "quantity": 1
+      }
+    ],
+    "total": 255,
+    "status": "pending",
+    "createdAt": "2026-08-28T19:22:39.894Z"
+  },
+  {
+    "id": "d513aa9d-b4a2-49dc-a2f1-7c5ec6fe45f2",
+    "fullName": "Store Admin",
+    "phone": "03121128987",
+    "address": "House No 14, SMCHS Block B, Shahrah-e-Faisal, near Ibex",
+    "city": "Karachi",
+    "paymentMethod": "Cash on Delivery",
+    "items": [
+      {
+        "productId": 5,
+        "name": "Vertical Striped Shirt",
+        "price": 212,
+        "size": "Small",
+        "color": "#5a6b4f",
+        "quantity": 9
+      }
+    ],
+    "total": 1923,
+    "status": "shipped",
+    "createdAt": "2026-08-28T19:23:36.705Z"
   }
 ]

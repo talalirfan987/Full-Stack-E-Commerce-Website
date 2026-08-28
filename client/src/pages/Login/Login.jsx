@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { login as loginRequest } from "../../api/api";
@@ -10,6 +10,9 @@ const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 
 function Login() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirectPath = searchParams.get("redirect") || "/";
+
   const { login } = useAuth();
   const [form, setForm] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
@@ -47,7 +50,7 @@ function Login() {
     try {
       const { user } = await loginRequest({ email: form.email.trim(), password: form.password });
       login(user);
-      navigate("/");
+      navigate(redirectPath);
     } catch (err) {
       setServerError(err.message || "Something went wrong. Please try again.");
     } finally {
@@ -95,7 +98,10 @@ function Login() {
           </form>
 
           <p className="signup__login-link">
-            Don't have an account? <Link to="/signup">Sign up</Link>
+            Don't have an account?{" "}
+            <Link to={redirectPath !== "/" ? `/signup?redirect=${redirectPath}` : "/signup"}>
+              Sign up
+            </Link>
           </p>
         </div>
       </main>

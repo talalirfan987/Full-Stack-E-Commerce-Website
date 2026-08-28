@@ -142,3 +142,42 @@
   font-weight: 800;
   margin-bottom: 0.75rem;
 }
+
+.checkout__login-warning {
+  display: flex;
+  gap: 1rem;
+  background: #fff7ed;
+  border: 1px solid #ffedd5;
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.checkout__login-warning-icon {
+  font-size: 1.6rem;
+}
+
+.checkout__login-warning-content h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #c2410c;
+  margin-bottom: 0.35rem;
+}
+
+.checkout__login-warning-content p {
+  font-size: 0.88rem;
+  color: #9a3412;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.checkout__login-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.checkout__auth-btn {
+  padding: 0.5rem 1.25rem !important;
+  font-size: 0.88rem !important;
+}
+

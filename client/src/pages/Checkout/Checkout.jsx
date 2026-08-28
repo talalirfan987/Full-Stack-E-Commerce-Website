@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Footer from "../../components/Footer/Footer";
 import { getCart, placeOrder } from "../../api/api";
+import { useAuth } from "../../context/AuthContext";
 import "./Checkout.css";
 
 function Checkout() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({
-    fullName: "",
+    fullName: user ? user.name : "",
     phone: "",
     address: "",
     city: "",
@@ -27,6 +29,12 @@ function Checkout() {
       .then(setCart)
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    if (user && !form.fullName) {
+      setForm((f) => ({ ...f, fullName: user.name }));
+    }
+  }, [user]);
 
   function handleChange(field, value) {
     setForm((f) => ({ ...f, [field]: value }));
@@ -46,6 +54,11 @@ function Checkout() {
   async function handleSubmit(e) {
     e.preventDefault();
     setServerError(null);
+
+    if (!user) {
+      setServerError("🔒 Order karne ke liye pehle Login / Sign Up karna zaroori hai! Please log in or sign up to complete your order.");
+      return;
+    }
 
     if (!validate()) return;
 
@@ -91,6 +104,26 @@ function Checkout() {
         ) : (
           <div className="checkout__layout">
             <form className="checkout__form" onSubmit={handleSubmit} noValidate>
+              {!user && (
+                <div className="checkout__login-warning">
+                  <div className="checkout__login-warning-icon">🔒</div>
+                  <div className="checkout__login-warning-content">
+                    <h3>Account Login Required</h3>
+                    <p>
+                      Order karne ke liye pehle Login / Sign Up karna zaroori hai. Details fill karne se pehle please account log in karein.
+                    </p>
+                    <div className="checkout__login-actions">
+                      <Link to="/login?redirect=/checkout" className="btn btn-primary checkout__auth-btn">
+                        🔑 Log In
+                      </Link>
+                      <Link to="/signup?redirect=/checkout" className="btn btn-outline checkout__auth-btn">
+                        📝 Sign Up
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <h1>Shipping Details</h1>
 
               <div className="checkout__field">
