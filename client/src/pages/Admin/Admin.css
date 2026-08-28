@@ -762,3 +762,68 @@
   background: #dbeafe !important;
 }
 
+/* Mobile & Tablet Responsiveness */
+@media (max-width: 768px) {
+  .admin-header__title h1 {
+    font-size: 1.7rem;
+  }
+
+  .admin-header__actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-filter-group {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .admin-filter-group select {
+    flex: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-page {
+    padding-top: 1.25rem;
+    padding-bottom: 3rem;
+  }
+
+  .admin-login-card {
+    padding: 1.5rem 1.25rem;
+    margin: 1.5rem auto;
+  }
+
+  .stat-card {
+    padding: 1rem 1.25rem;
+  }
+
+  .stat-card__value {
+    font-size: 1.3rem;
+  }
+
+  .order-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-card__header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .admin-modal {
+    padding: 1.25rem;
+  }
+}
+
+
