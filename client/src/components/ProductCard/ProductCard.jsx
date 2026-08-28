@@ -21,7 +21,13 @@ function ProductCard({ product }) {
   return (
     <Link className="product-card" to={`/product/${product.id}`}>
       <div className="product-card__image">
-        <img src={image} alt={name} onError={(e) => (e.target.style.visibility = "hidden")} />
+        <img
+          src={image}
+          alt={name}
+          onError={(e) => {
+            e.target.src = "/images/products/skinny-fit-jeans.jpg";
+          }}
+        />
       </div>
 
       <h3 className="product-card__name">{name}</h3>

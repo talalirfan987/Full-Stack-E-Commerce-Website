@@ -13,7 +13,13 @@ function ImageGallery({ images, name }) {
             className={`image-gallery__thumb ${i === active ? "active" : ""}`}
             onClick={() => setActive(i)}
           >
-            <img src={src} alt={`${name} thumbnail ${i + 1}`} onError={(e) => (e.target.style.visibility = "hidden")} />
+            <img
+              src={src}
+              alt={`${name} thumbnail ${i + 1}`}
+              onError={(e) => {
+                e.target.src = "/images/products/skinny-fit-jeans.jpg";
+              }}
+            />
           </button>
         ))}
       </div>
@@ -22,7 +28,9 @@ function ImageGallery({ images, name }) {
         <img
           src={images[active]}
           alt={name}
-          onError={(e) => (e.target.style.visibility = "hidden")}
+          onError={(e) => {
+            e.target.src = "/images/products/skinny-fit-jeans.jpg";
+          }}
         />
       </div>
     </div>
