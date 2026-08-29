@@ -5,12 +5,14 @@ import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import Footer from "../../components/Footer/Footer";
 import { getCart, placeOrder } from "../../api/api";
 import { useAuth } from "../../context/AuthContext";
+import { useCart } from "../../context/CartContext";
 import Loader from "../../components/Loader/Loader";
 import "./Checkout.css";
 
 function Checkout() {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { fetchCart } = useCart();
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({
@@ -33,13 +35,15 @@ function Checkout() {
 
   useEffect(() => {
     if (user && !form.fullName) {
-      setForm((f) => ({ ...f, fullName: user.name }));
+      setForm((prev) => ({ ...prev, fullName: user.name }));
     }
   }, [user]);
 
   function handleChange(field, value) {
-    setForm((f) => ({ ...f, [field]: value }));
-    setErrors((e) => ({ ...e, [field]: null }));
+    setForm((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: null }));
+    }
   }
 
   function validate() {
@@ -57,7 +61,7 @@ function Checkout() {
     setServerError(null);
 
     if (!user) {
-      setServerError("🔒 Order karne ke liye pehle Login / Sign Up karna zaroori hai! Please log in or sign up to complete your order.");
+      setServerError("Order karne ke liye pehle Login / Sign Up karna zaroori hai! Please log in or sign up to complete your order.");
       return;
     }
 
@@ -66,6 +70,7 @@ function Checkout() {
     setSubmitting(true);
     try {
       await placeOrder(form);
+      await fetchCart();
       setSuccess(true);
       setTimeout(() => navigate("/"), 2000);
     } catch (err) {

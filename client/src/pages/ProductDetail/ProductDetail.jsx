@@ -8,7 +8,8 @@ import ReviewCard from "../../components/ReviewCard/ReviewCard";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Footer from "../../components/Footer/Footer";
-import { getProduct, getReviews, getProducts, addToCart } from "../../api/api";
+import { getProduct, getReviews, getProducts } from "../../api/api";
+import { useCart } from "../../context/CartContext";
 import Loader from "../../components/Loader/Loader";
 import "./ProductDetail.css";
 
@@ -18,64 +19,53 @@ function Stars({ rating }) {
   const full = Math.round(rating);
   return (
     <span className="pd__stars">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <span key={i} className={i < full ? "star star--filled" : "star"}>
-          ★
-        </span>
-      ))}
-      <span className="pd__rating-value">{rating}/5</span>
+      {"★".repeat(full)}
+      {"☆".repeat(5 - full)}
     </span>
   );
 }
 
 function ProductDetail() {
   const { id } = useParams();
-
+  const { addItemToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [related, setRelated] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [visibleReviews, setVisibleReviews] = useState(REVIEWS_PAGE_SIZE);
   const [addStatus, setAddStatus] = useState(null);
+  const [activeTab, setActiveTab] = useState("reviews");
+  const [reviewSort, setReviewSort] = useState("latest");
+  const [reviewCount, setReviewCount] = useState(REVIEWS_PAGE_SIZE);
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    setVisibleReviews(REVIEWS_PAGE_SIZE);
-    setAddStatus(null);
-
-    async function load() {
+    async function loadData() {
+      setLoading(true);
+      setError(null);
       try {
-        const p = await getProduct(id);
-        if (cancelled) return;
-        setProduct(p);
-        setSelectedColor(p.colors?.[0] || null);
-        setSelectedSize(p.sizes?.[0] || null);
-        setQuantity(1);
+        const prodData = await getProduct(id);
+        const reviewsData = await getReviews(id);
+        const relatedRes = await getProducts({ category: prodData.category, limit: 4 });
 
-        const [reviewData, relatedData] = await Promise.all([
-          getReviews(id),
-          getProducts({ category: p.category, limit: 4 }),
-        ]);
-
-        if (cancelled) return;
-        setReviews(reviewData);
-        setRelated(relatedData.products.filter((rp) => rp.id !== p.id).slice(0, 4));
-        setError(null);
+        if (!cancelled) {
+          setProduct(prodData);
+          setReviews(reviewsData);
+          setRelated(relatedRes.products.filter((p) => String(p.id) !== String(id)));
+          if (prodData.sizes?.length) setSelectedSize(prodData.sizes[0]);
+          if (prodData.colors?.length) setSelectedColor(prodData.colors[0]);
+        }
       } catch (err) {
-        if (!cancelled) setError(err);
+        if (!cancelled) setError(err.message || "Failed to load product");
       } finally {
         if (!cancelled) setLoading(false);
       }
     }
 
-    load();
-
+    loadData();
     return () => {
       cancelled = true;
     };
@@ -83,8 +73,11 @@ function ProductDetail() {
 
   async function handleAddToCart() {
     try {
-      await addToCart({
+      await addItemToCart({
         productId: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
         size: selectedSize,
         color: selectedColor,
         quantity,

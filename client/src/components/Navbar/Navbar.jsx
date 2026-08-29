@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useCart } from "../../context/CartContext";
 import "./Navbar.css";
 
 const SHOP_DROPDOWN = [
@@ -23,6 +24,7 @@ function Navbar() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [query, setQuery] = useState("");
   const { user, logout } = useAuth();
+  const { cartCount } = useCart();
   const navigate = useNavigate();
 
   function handleLogout(e) {
@@ -128,8 +130,9 @@ function Navbar() {
         </div>
 
         <div className="navbar__icons">
-          <Link to="/cart" aria-label="Cart" className="icon-btn">
+          <Link to="/cart" aria-label="Cart" className="icon-btn navbar__cart-btn">
             🛒
+            {cartCount > 0 && <span className="navbar__cart-badge">{cartCount}</span>}
           </Link>
 
           {user ? (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
@@ -6,53 +6,27 @@ import CartItem from "../../components/CartItem/CartItem";
 import OrderSummary from "../../components/OrderSummary/OrderSummary";
 import Newsletter from "../../components/Newsletter/Newsletter";
 import Footer from "../../components/Footer/Footer";
-import { getCart, updateCartItem, removeCartItem } from "../../api/api";
+import { useCart } from "../../context/CartContext";
 import Loader from "../../components/Loader/Loader";
 import "./Cart.css";
 
 function Cart() {
   const navigate = useNavigate();
-  const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { cart, loading, updateItemQuantity, removeItemFromCart } = useCart();
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    getCart()
-      .then((data) => {
-        if (!cancelled) setCart(data);
-      })
-      .catch((err) => {
-        if (!cancelled) setError(err);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
   async function handleQuantityChange(id, quantity) {
-    const prev = cart;
-    setCart((c) => c.map((item) => (item.id === id ? { ...item, quantity } : item)));
     try {
-      await updateCartItem(id, quantity);
+      await updateItemQuantity(id, quantity);
     } catch (err) {
-      setCart(prev);
       setError(err);
     }
   }
 
   async function handleRemove(id) {
-    const prev = cart;
-    setCart((c) => c.filter((item) => item.id !== id));
     try {
-      await removeCartItem(id);
+      await removeItemFromCart(id);
     } catch (err) {
-      setCart(prev);
       setError(err);
     }
   }
