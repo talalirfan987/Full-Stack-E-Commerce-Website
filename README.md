@@ -4,6 +4,10 @@ A full-stack e-commerce website built with React (Vite) on the frontend and Expr
 backend, using JSON files for data storage. Based on the "E-commerce Website Template (Freebie)"
 Figma design.
 
+## Live Demo
+
+- **Vercel Deployment**: [https://e-commers-website.vercel.app](https://e-commers-website.vercel.app)
+
 ## Stack
 
 - **Frontend**: React 19 (Vite), React Router

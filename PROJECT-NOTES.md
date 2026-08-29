@@ -6,7 +6,7 @@ Ek **full-stack e-commerce website** hai, Figma design (SHOP.CO template) ke upa
 - **Frontend**: React (Vite)
 - **Backend**: Express.js
 - **Database ki jagah**: JSON files (`server/data/*.json`) — koi MongoDB/MySQL nahi
-- **Deployment**: Frontend Vercel pe, Backend Render pe
+- **Deployment**: Frontend Vercel pe (`https://e-commers-website.vercel.app`), Backend Render pe
 
 ---
 
