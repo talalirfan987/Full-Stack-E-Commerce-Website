@@ -25,9 +25,14 @@ function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  function handleLogout() {
+  function handleLogout(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     logout();
     setProfileOpen(false);
+    setMenuOpen(false);
     navigate("/");
   }
 
