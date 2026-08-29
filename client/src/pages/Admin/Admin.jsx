@@ -247,7 +247,6 @@ function Admin() {
         {/* Toast Notification */}
         {toast && (
           <div className={`admin-toast admin-toast--${toast.type}`}>
-            {toast.type === "error" ? "⚠️ " : "✅ "}
             {toast.msg}
           </div>
         )}
@@ -255,35 +254,35 @@ function Admin() {
         {/* Top Header Banner */}
         <header className="admin-header">
           <div className="admin-header__title">
-            <h1>👑 Admin Portal</h1>
+            <h1>Admin Portal</h1>
             <p>Manage store orders, customer delivery info, product catalog and live sales</p>
           </div>
           <div className="admin-header__actions">
             {isAdmin && (
               <button className="admin-btn admin-btn--secondary" onClick={fetchData} title="Refresh data">
-                🔄 Refresh Data
+                Refresh Data
               </button>
             )}
             <Link to="/" className="admin-btn admin-btn--outline">
-              🏪 Back to Shop
+              Back to Shop
             </Link>
           </div>
         </header>
 
         {!isAdmin ? (
           <div className="admin-login-card">
-            <h2>👑 Admin Portal Login</h2>
+            <h2>Admin Portal Login</h2>
             <p className="admin-login-subtitle">
               Aap is Admin Portal login details se log in kar sakte hain:
             </p>
 
             <div className="admin-credentials-box">
               <div className="credential-row">
-                <span>📧 Admin Email:</span>
+                <span>Admin Email:</span>
                 <code>admin@shop.co</code>
               </div>
               <div className="credential-row">
-                <span>🔑 Admin Password:</span>
+                <span>Admin Password:</span>
                 <code>admin123</code>
               </div>
             </div>
@@ -311,10 +310,10 @@ function Admin() {
                 />
               </div>
 
-              {loginError && <p className="admin-login-error">⚠️ {loginError}</p>}
+              {loginError && <p className="admin-login-error">{loginError}</p>}
 
               <button type="submit" className="admin-btn admin-btn--primary admin-login-submit" disabled={loggingIn}>
-                {loggingIn ? "Logging in..." : "🔑 Log In as Admin"}
+                {loggingIn ? "Logging in..." : "Log In as Admin"}
               </button>
 
               <button
@@ -323,7 +322,7 @@ function Admin() {
                 onClick={() => handleAdminAuth(null, "admin@shop.co", "admin123")}
                 disabled={loggingIn}
               >
-                ⚡ 1-Click Quick Admin Login
+                Quick Admin Login
               </button>
             </form>
           </div>
@@ -332,7 +331,6 @@ function Admin() {
             {/* Overview Stats Cards */}
         <div className="admin-stats-grid">
           <div className="stat-card stat-card--revenue">
-            <div className="stat-card__icon">💰</div>
             <div className="stat-card__content">
               <span className="stat-card__label">Total Revenue</span>
               <h3 className="stat-card__value">${totalRevenue.toLocaleString()}</h3>
@@ -340,7 +338,6 @@ function Admin() {
           </div>
 
           <div className="stat-card stat-card--orders">
-            <div className="stat-card__icon">📦</div>
             <div className="stat-card__content">
               <span className="stat-card__label">Total Orders</span>
               <h3 className="stat-card__value">{totalOrders}</h3>
@@ -348,7 +345,6 @@ function Admin() {
           </div>
 
           <div className="stat-card stat-card--pending">
-            <div className="stat-card__icon">⏳</div>
             <div className="stat-card__content">
               <span className="stat-card__label">Pending Orders</span>
               <h3 className="stat-card__value">{pendingOrders}</h3>
@@ -356,7 +352,6 @@ function Admin() {
           </div>
 
           <div className="stat-card stat-card--products">
-            <div className="stat-card__icon">🏷️</div>
             <div className="stat-card__content">
               <span className="stat-card__label">Total Products</span>
               <h3 className="stat-card__value">{totalProducts}</h3>
@@ -370,20 +365,20 @@ function Admin() {
             className={`admin-tab ${activeTab === "orders" ? "admin-tab--active" : ""}`}
             onClick={() => setActiveTab("orders")}
           >
-            📦 Customer Orders ({orders.length})
+            Customer Orders ({orders.length})
             {pendingOrders > 0 && <span className="admin-tab__badge">{pendingOrders} pending</span>}
           </button>
           <button
             className={`admin-tab ${activeTab === "products" ? "admin-tab--active" : ""}`}
             onClick={() => setActiveTab("products")}
           >
-            👕 Products Catalog ({products.length})
+            Products Catalog ({products.length})
           </button>
           <button
             className={`admin-tab ${activeTab === "overview" ? "admin-tab--active" : ""}`}
             onClick={() => setActiveTab("overview")}
           >
-            📊 Quick Analytics Overview
+            Analytics Overview
           </button>
         </div>
 
@@ -391,7 +386,7 @@ function Admin() {
           <Loader label="Loading Admin Dashboard..." />
         ) : error ? (
           <div className="admin-error">
-            <p>⚠️ {error}</p>
+            <p>{error}</p>
             <button className="admin-btn admin-btn--primary" onClick={fetchData}>
               Try Again
             </button>
@@ -403,7 +398,7 @@ function Admin() {
               <div className="admin-tab-content">
                 <div className="admin-toolbar">
                   <div className="admin-search-box">
-                    <span className="admin-search-icon">🔍</span>
+                    <span className="admin-search-icon" />
                     <input
                       type="text"
                       placeholder="Search by customer name, phone, city, address or order ID..."
@@ -438,7 +433,7 @@ function Admin() {
 
                 {filteredOrders.length === 0 ? (
                   <div className="admin-empty-state">
-                    <p>📦 No orders found matching your search/filter criteria.</p>
+                    <p>No orders found matching your search/filter criteria.</p>
                   </div>
                 ) : (
                   <div className="orders-list">
@@ -457,7 +452,7 @@ function Admin() {
                               <span className="order-card__id">
                                 Order ID: <code>#{order.id.slice(0, 8)}</code>
                               </span>
-                              <span className="order-card__date">📅 {formattedDate}</span>
+                              <span className="order-card__date">{formattedDate}</span>
                             </div>
 
                             <div className="order-card__header-right">
@@ -489,7 +484,7 @@ function Admin() {
                                 onClick={() => handleDeleteOrder(order.id)}
                                 title="Delete Order"
                               >
-                                🗑️
+                                Delete
                               </button>
                             </div>
                           </div>
@@ -497,7 +492,7 @@ function Admin() {
                           {/* Customer & Shipping Details Grid */}
                           <div className="order-card__body">
                             <div className="customer-info-box">
-                              <h4>👤 Customer & Shipping Information</h4>
+                              <h4>Customer & Shipping Information</h4>
                               <div className="customer-details">
                                 <div className="detail-item">
                                   <span className="detail-label">Full Name:</span>
@@ -506,19 +501,19 @@ function Admin() {
                                 <div className="detail-item">
                                   <span className="detail-label">Phone Number:</span>
                                   <span className="detail-value phone-value">
-                                    <a href={`tel:${order.phone}`}>📞 {order.phone}</a>
+                                    <a href={`tel:${order.phone}`}>{order.phone}</a>
                                   </span>
                                 </div>
                                 <div className="detail-item">
                                   <span className="detail-label">Delivery Address:</span>
                                   <span className="detail-value">
-                                    📍 {order.address}, {order.city}
+                                    {order.address}, {order.city}
                                   </span>
                                 </div>
                                 <div className="detail-item">
                                   <span className="detail-label">Payment Method:</span>
                                   <span className="detail-value payment-badge">
-                                    💳 {order.paymentMethod || "Cash on Delivery"}
+                                    {order.paymentMethod || "Cash on Delivery"}
                                   </span>
                                 </div>
                               </div>
@@ -526,7 +521,7 @@ function Admin() {
 
                             {/* Ordered Items Table */}
                             <div className="items-info-box">
-                              <h4>🛒 Items Ordered ({order.items?.length || 0})</h4>
+                              <h4>Items Ordered ({order.items?.length || 0})</h4>
                               <div className="items-table-wrapper">
                                 <table className="items-table">
                                   <thead>
@@ -592,7 +587,7 @@ function Admin() {
               <div className="admin-tab-content">
                 <div className="admin-toolbar">
                   <div className="admin-search-box">
-                    <span className="admin-search-icon">🔍</span>
+                    <span className="admin-search-icon" />
                     <input
                       type="text"
                       placeholder="Search products by title or category..."
@@ -602,7 +597,7 @@ function Admin() {
                   </div>
 
                   <button className="admin-btn admin-btn--primary" onClick={openAddProductModal}>
-                    ➕ Add New Product
+                    Add New Product
                   </button>
                 </div>
 
@@ -658,14 +653,14 @@ function Admin() {
                                 onClick={() => openEditProductModal(prod)}
                                 title="Edit Product"
                               >
-                                ✏️
+                                Edit
                               </button>
                               <button
                                 className="admin-btn-icon admin-btn-icon--danger"
                                 onClick={() => handleDeleteProduct(prod.id)}
                                 title="Delete Product"
                               >
-                                🗑️
+                                Delete
                               </button>
                             </div>
                           </td>
@@ -681,7 +676,7 @@ function Admin() {
             {activeTab === "overview" && (
               <div className="admin-tab-content">
                 <div className="overview-section">
-                  <h3>⚡ Recent Activity & Store Performance</h3>
+                  <h3>Recent Activity & Store Performance</h3>
                   <p>Here is a quick snapshot of the latest order activity.</p>
 
                   <div className="recent-orders-wrapper">
@@ -734,7 +729,7 @@ function Admin() {
           <div className="admin-modal-overlay">
             <div className="admin-modal">
               <div className="admin-modal__header">
-                <h3>{editingProduct ? "✏️ Edit Product" : "➕ Add New Product"}</h3>
+                <h3>{editingProduct ? "Edit Product" : "Add New Product"}</h3>
                 <button className="admin-close-btn" onClick={() => setIsProductModalOpen(false)}>
                   ✕
                 </button>

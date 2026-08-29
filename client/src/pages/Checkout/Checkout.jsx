@@ -107,7 +107,6 @@ function Checkout() {
             <form className="checkout__form" onSubmit={handleSubmit} noValidate>
               {!user && (
                 <div className="checkout__login-warning">
-                  <div className="checkout__login-warning-icon">🔒</div>
                   <div className="checkout__login-warning-content">
                     <h3>Account Login Required</h3>
                     <p>
@@ -115,10 +114,10 @@ function Checkout() {
                     </p>
                     <div className="checkout__login-actions">
                       <Link to="/login?redirect=/checkout" className="btn btn-primary checkout__auth-btn">
-                        🔑 Log In
+                        Log In
                       </Link>
                       <Link to="/signup?redirect=/checkout" className="btn btn-outline checkout__auth-btn">
-                        📝 Sign Up
+                        Sign Up
                       </Link>
                     </div>
                   </div>
