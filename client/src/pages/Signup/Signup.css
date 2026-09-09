@@ -69,6 +69,11 @@
   color: #ff3333;
 }
 
+.signup__hint {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
 .signup__server-error {
   font-size: 0.85rem;
   color: #ff3333;
