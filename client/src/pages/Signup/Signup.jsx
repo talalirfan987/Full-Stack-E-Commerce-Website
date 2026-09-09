@@ -4,9 +4,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { signup } from "../../api/api";
 import { useAuth } from "../../context/AuthContext";
+import { isAlphaText, isStrongPassword, isValidEmail } from "../../utils/validators";
 import "./Signup.css";
-
-const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 
 function Signup() {
   const navigate = useNavigate();
@@ -30,16 +29,21 @@ function Signup() {
 
     if (!form.name.trim()) {
       nextErrors.name = "Name is required.";
+    } else if (!isAlphaText(form.name)) {
+      nextErrors.name = "Name should contain only letters (no numbers or symbols).";
     }
     if (!form.email.trim()) {
       nextErrors.email = "Email is required.";
-    } else if (!EMAIL_REGEX.test(form.email)) {
+    } else if (!isValidEmail(form.email)) {
       nextErrors.email = "Enter a valid email address.";
     }
     if (!form.password) {
       nextErrors.password = "Password is required.";
     } else if (form.password.length < 6) {
       nextErrors.password = "Password must be at least 6 characters.";
+    } else if (!isStrongPassword(form.password)) {
+      nextErrors.password =
+        "This password is too weak. Avoid simple ones like 123456 or 111111 — use a mix of letters and numbers.";
     }
     if (form.confirmPassword !== form.password) {
       nextErrors.confirmPassword = "Passwords do not match.";
@@ -115,7 +119,13 @@ function Signup() {
                   value={form.password}
                   onChange={(e) => handleChange("password", e.target.value)}
                 />
-                {errors.password && <span className="signup__error">{errors.password}</span>}
+                {errors.password ? (
+                  <span className="signup__error">{errors.password}</span>
+                ) : (
+                  <span className="signup__hint">
+                    6+ characters, mix letters and numbers — no 123456 or 111111.
+                  </span>
+                )}
               </div>
 
               <div className="signup__field">
