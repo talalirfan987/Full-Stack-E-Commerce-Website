@@ -79,7 +79,7 @@ function Checkout() {
     setServerError(null);
 
     if (!user) {
-      setServerError("Order karne ke liye pehle Login / Sign Up karna zaroori hai! Please log in or sign up to complete your order.");
+      setServerError("Please log in or sign up to complete your order.");
       return;
     }
 
@@ -133,7 +133,7 @@ function Checkout() {
                   <div className="checkout__login-warning-content">
                     <h3>Account Login Required</h3>
                     <p>
-                      Order karne ke liye pehle Login / Sign Up karna zaroori hai. Details fill karne se pehle please account log in karein.
+                      You need to log in or sign up before placing an order. Please log in to your account before filling in your details.
                     </p>
                     <div className="checkout__login-actions">
                       <Link to="/login?redirect=/checkout" className="btn btn-primary checkout__auth-btn">
