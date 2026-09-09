@@ -7,6 +7,7 @@ import { getCart, placeOrder } from "../../api/api";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 import Loader from "../../components/Loader/Loader";
+import { isAlphaText, isValidPhone } from "../../utils/validators";
 import "./Checkout.css";
 
 function Checkout() {
@@ -48,10 +49,27 @@ function Checkout() {
 
   function validate() {
     const nextErrors = {};
-    if (!form.fullName.trim()) nextErrors.fullName = "Full name is required.";
-    if (!form.phone.trim()) nextErrors.phone = "Phone number is required.";
+
+    if (!form.fullName.trim()) {
+      nextErrors.fullName = "Full name is required.";
+    } else if (!isAlphaText(form.fullName)) {
+      nextErrors.fullName = "Full name should contain only letters (no numbers or symbols).";
+    }
+
+    if (!form.phone.trim()) {
+      nextErrors.phone = "Phone number is required.";
+    } else if (!isValidPhone(form.phone)) {
+      nextErrors.phone = "Enter a valid phone number (digits only, 7-15 digits).";
+    }
+
     if (!form.address.trim()) nextErrors.address = "Address is required.";
-    if (!form.city.trim()) nextErrors.city = "City is required.";
+
+    if (!form.city.trim()) {
+      nextErrors.city = "City is required.";
+    } else if (!isAlphaText(form.city)) {
+      nextErrors.city = "City should contain only letters (no numbers or symbols).";
+    }
+
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
   }
