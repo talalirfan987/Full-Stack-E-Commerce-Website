@@ -15,7 +15,6 @@ const NAV_LINKS = [
   { label: "Shop", to: "/shop", dropdown: SHOP_DROPDOWN },
   { label: "On Sale", to: "/shop?onSale=true" },
   { label: "New Arrivals", to: "/shop?section=new-arrivals" },
-  { label: "Admin Portal", to: "/admin" },
 ];
 
 function Navbar() {
@@ -26,6 +25,7 @@ function Navbar() {
   const { user, logout } = useAuth();
   const { cartCount } = useCart();
   const navigate = useNavigate();
+  const isAdmin = user && (user.role === "admin" || user.email === "admin@shop.co");
 
   function handleLogout(e) {
     if (e) {
@@ -154,11 +154,13 @@ function Navbar() {
               {profileOpen && (
                 <ul className="navbar__dropdown navbar__dropdown--right">
                   <li className="navbar__profile-email">{user.email}</li>
-                  <li>
-                    <Link to="/admin" onClick={() => setProfileOpen(false)}>
-                      Admin Portal
-                    </Link>
-                  </li>
+                  {isAdmin && (
+                    <li>
+                      <Link to="/admin" onClick={() => setProfileOpen(false)}>
+                        Admin Portal
+                      </Link>
+                    </li>
+                  )}
                   <li>
                     <button type="button" onClick={handleLogout}>
                       Log Out
