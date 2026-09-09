@@ -4,9 +4,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { login as loginRequest } from "../../api/api";
 import { useAuth } from "../../context/AuthContext";
+import { isValidEmail } from "../../utils/validators";
 import "../Signup/Signup.css";
-
-const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 
 function Login() {
   const navigate = useNavigate();
@@ -29,7 +28,7 @@ function Login() {
 
     if (!form.email.trim()) {
       nextErrors.email = "Email is required.";
-    } else if (!EMAIL_REGEX.test(form.email)) {
+    } else if (!isValidEmail(form.email)) {
       nextErrors.email = "Enter a valid email address.";
     }
     if (!form.password) {
