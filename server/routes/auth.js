@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
 const { readData, writeData } = require("../utils/jsonStore");
+const { isStrongPassword } = require("../utils/passwordPolicy");
 
 const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
 
@@ -17,6 +18,11 @@ router.post("/signup", async (req, res) => {
   }
   if (!password || password.length < 6) {
     return res.status(400).json({ message: "Password must be at least 6 characters." });
+  }
+  if (!isStrongPassword(password)) {
+    return res.status(400).json({
+      message: "This password is too weak. Avoid simple ones like 123456 or 111111 — use a mix of letters and numbers.",
+    });
   }
 
   const users = readData("users.json");
