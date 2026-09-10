@@ -216,16 +216,16 @@ function ProductDetail() {
                   ) : (
                     <>
                       <div className="pd__reviews-grid">
-                        {reviews.slice(0, visibleReviews).map((review) => (
+                        {reviews.slice(0, reviewCount).map((review) => (
                           <ReviewCard key={review.id} review={review} />
                         ))}
                       </div>
 
-                      {visibleReviews < reviews.length && (
+                      {reviewCount < reviews.length && (
                         <div className="pd__reviews-footer">
                           <button
                             className="btn btn-outline"
-                            onClick={() => setVisibleReviews((v) => v + REVIEWS_PAGE_SIZE)}
+                            onClick={() => setReviewCount((v) => v + REVIEWS_PAGE_SIZE)}
                           >
                             Load More Reviews
                           </button>
